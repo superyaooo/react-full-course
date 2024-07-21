@@ -1,28 +1,24 @@
-import { UserProfile } from "./components/UserProfile";
+import { UserDetails } from "./components/UserDetails";
 
 export default function App() {
-    const callMe = () => {
-        console.log("hello");
-    };
+    const mockUsers = [
+        {
+            id: 1,
+            username: "anson",
+            email: "anson@ansonthedev.com"
+        },
+        {
+            id: 2,
+            username: "michael",
+            email: "michael@ansonthedev.com"
+        }
+    ];
     
     return (
-        <>
-            <UserProfile 
-                age={21} 
-                isLoggedIn={true}
-                username="Bob"
-                callMe={callMe}
-                favoriteFoods={[
-                    {
-                        name: "Sushi",
-                        id: "sushi"
-                    },
-                    {
-                        name: "ramen",
-                        id: "ramen"
-                    },
-                ]}
-            />
-        </>
+        <div>
+            {mockUsers.map((user) => {
+                return <UserDetails key={user.id} user={user}/>;
+            })}
+        </div>
     );
 }
