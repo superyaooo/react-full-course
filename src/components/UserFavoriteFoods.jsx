@@ -1,3 +1,5 @@
+import styles from "./users.module.scss";
+
 export function UserFavoriteFoods(props) {
     const foodArray = props.favoriteFoods;
     const foodList = foodArray.map(food => 
@@ -6,7 +8,7 @@ export function UserFavoriteFoods(props) {
 
     return (
         <section>
-            <span>Fav foods:</span>
+            <span className={styles.foodsTitle}>Fav foods:</span>
             <ul>
                 {foodList}
             </ul>
