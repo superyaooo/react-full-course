@@ -4,7 +4,6 @@ export function UserFavoriteFoods(props) {
         <li key={food.id}>{food.name}</li>
     );
 
-    
     return (
         <section>
             <span>Fav foods:</span>

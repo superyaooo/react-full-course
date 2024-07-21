@@ -6,8 +6,7 @@ export default function App() {
     };
     
     return (
-        <div>
-            <h1>root component</h1>
+        <>
             <UserProfile 
                 age={21} 
                 isLoggedIn={true}
@@ -24,6 +23,6 @@ export default function App() {
                     },
                 ]}
             />
-        </div>
+        </>
     );
 }

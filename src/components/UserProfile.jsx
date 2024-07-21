@@ -6,12 +6,14 @@ export function UserProfile(props) {
     props.callMe();
     
     return (
-        <div id="user-profile">
-            <UserUsername username={props.username}/>
+        <>
             <b>Age: </b>
             <span>{props.age}</span>
-            <UserFavoriteFoods favoriteFoods={props.favoriteFoods}/>
-        </div>
+            <>
+                <UserUsername username={props.username}/>
+                <UserFavoriteFoods favoriteFoods={props.favoriteFoods}/>    
+            </>
+        </>
     );
 }
 
