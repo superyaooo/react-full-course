@@ -2,6 +2,9 @@ export function LoginForm() {
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
+            const formData = new FormData(e.target);
+            console.log(formData.get('username'));
+            console.log(formData.get('password'));
         }}>
             <label htmlFor="username">Username</label>
             <br/>
@@ -10,6 +13,7 @@ export function LoginForm() {
                 onChange={(e) => {
                     console.log(e.target.value);
                 }}
+                name="username"
             />
             <br/>
             <label htmlFor="password">Password</label>
@@ -18,6 +22,7 @@ export function LoginForm() {
                 onChange={(e) => {
                     console.log(`password: ${e.target.value}`);
                 }}
+                name="password"
             />
             <br/>
             <button>Login</button>
