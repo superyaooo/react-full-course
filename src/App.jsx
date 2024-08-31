@@ -1,7 +1,13 @@
-import { LoginForm } from "./components/LoginForm";
+import { RegisterForm } from "./components/RegisterForm";
 
 export default function App() {
-    return <div>
-        <LoginForm />
-    </div>;
+    window.addEventListener("resize", (e) => {
+        console.log(window.innerHeight, window.innerWidth);
+    });
+
+    return (
+        <div>
+            <RegisterForm />
+        </div>
+    );
 }
