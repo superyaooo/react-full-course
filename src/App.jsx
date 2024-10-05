@@ -1,39 +1,63 @@
 import { useState, useEffect } from "react";
 
 export default function App() {
-	const [counter, setCounter] = useState(0);
-	const [sync, setSync] = useState(false);
-
-	useEffect(() => {
-		document.title = "React Tutorial ";
-	}, [sync]);
-
-	useEffect(() => {
-		const controller = new AbortController();
-		
-		async function fetchUsers() {
-			try {
-				const response = await fetch(
-					'https://jsonplaceholder.typicode.com/users',
-					{signal: controller.signal}
-				);
-				const json = await response.json();
-				console.log(json);
-			} catch (err) {
-				console.log(err);
-			}
-		}
-		fetchUsers();
-		return () => {
-			controller.abort();
-		}
-	});  
+	const [blogPostData, setBlogPostData] = useState({
+		title: "",
+		body: ""
+	});
 
     return (
-		<div>
-			<div>You clicked the button {counter} times.</div>
-			<button onClick={() => setCounter((counter) => counter + 1)}>Click Me</button>
-			<button onClick={() => setSync((current) => !current)}>Sync</button>
-		</div>
-	);
+			<div>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					if (blogPostData.title && blogPostData.body) {
+						fetch('https://jsonplaceholder.typicode.com/posts', {
+							method: 'POST',
+							body: JSON.stringify({
+								userId: 1,
+								title: blogPostData.title,
+								body: blogPostData.body
+							}),
+							headers: {
+								'Content-type': 'application/json; charset=UTF-8'
+							}
+						}).then((response) => response.json())
+							.then((data) => {
+								console.log('success!');
+								console.log(data);
+							})
+							.catch((err) => console.log(err));
+					}
+				}}
+			>
+					<div>
+						<label htmlFor='title'>Title</label>
+						<input
+							type='text'
+							id='title'
+							value={blogPostData.title}
+							onChange={(e) => {
+								setBlogPostData((currentBlogPostData) => ({
+									...currentBlogPostData,
+									title: e.target.value,
+								}));
+							}}
+						/>
+					</div>
+					<div>
+						<label htmlFor="body">Body</label>
+						<input type="text" id="body" value={blogPostData.body}
+							onChange={(e) => {
+								setBlogPostData((currentBlogPostData) => ({
+									...currentBlogPostData,
+									body: e.target.value
+								}));
+							}}
+						/>
+				</div>
+				<button>Submit</button>
+				</form>
+			</div>
+			);
 }
