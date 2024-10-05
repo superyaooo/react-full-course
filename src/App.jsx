@@ -1,12 +1,20 @@
-import { useDocumentClick } from "./utils/hooks/useDecumentClick";
+import { useState } from "react";
+import { PostContainer } from "./components/PostContainer";
+import { UserContext } from "./utils/contexts/UserContext";
 
 export default function App() {
-
-	useDocumentClick();
+	const [userData, setUserData] = useState({
+		id: 1,
+		username: 'test',
+		email: 'tst@tes.com',
+		displayName: 'test user',
+	});
 
     return (
-		<div>
-		
-		</div>
+		<UserContext.Provider value={{...userData, setUserData}}>
+			<div>
+				<PostContainer/>
+			</div>
+		</UserContext.Provider>
 	);
 }
